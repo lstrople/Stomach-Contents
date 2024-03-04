@@ -66,6 +66,8 @@ resultsHayW= WTcMC(safoHayRIS, weight="N_items", replicates=999)
 
 safohayE = Eindex(safoHayRIS, index = "saramaki", jackknife = TRUE)
 
+#Schoner 0 niche overlap and 1 non niche over
+
 sumMC.RInSp(resultsHayW)
 
 #Paul
@@ -100,6 +102,11 @@ resultsThibW = WTcMC(safothibRIS, weight="N_items", replicates=999)
 TroutE = Eindex(safothibRIS, index = "saramaki", jackknife = TRUE)
 
 sumMC.RInSp(resultsThibW)
+
+#by season 
+#schoener 
+#Shannon diversity index 
+#Figures nice 
 
 
 
