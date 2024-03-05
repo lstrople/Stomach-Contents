@@ -2,7 +2,7 @@
 #Library
 ##########
 library(RInSp)
-
+library(vegan)
 ################################
 #Discrete - stickleback example
 ################################
@@ -126,6 +126,9 @@ TroutEPauWi = Eindex(safopauRISWi, index = "saramaki", jackknife = TRUE)
 
 sumMC.RInSp(resultsPauWi)
 
+#Shoener index 
+PSiPauWi <- PSicalc(safopauRISWi, exclude = FALSE, replicates = 999)
+
 #Cascapedia
 safocascRISWi = import.RInSp(winter, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Cascapedia"))
 
@@ -136,6 +139,8 @@ resultsCascWWi= WTcMC(safocascRISWi, weight="N_items", replicates=999)
 TroutECascWi = Eindex(safocascRISWi, index = "saramaki", jackknife = TRUE)
 
 sumMC.RInSp(resultsCascWWi)
+
+PSiCascWi <- PSicalc(safocascRISWi, exclude = FALSE, replicates = 999)
 
 
 #Thibault
@@ -148,6 +153,8 @@ resultsThibWWi = WTcMC(safothibRISWi, weight="N_items", replicates=999)
 TroutEWi = Eindex(safothibRISWi, index = "saramaki", jackknife = TRUE)
 
 sumMC.RInSp(resultsThibWWi)
+
+PSiThibWi <- PSicalc(safothibRISWi, exclude = FALSE, replicates = 999)
 
 
 ########
@@ -166,6 +173,8 @@ TroutEPauSu = Eindex(safopauRISSu, index = "saramaki", jackknife = TRUE)
 
 sumMC.RInSp(resultsPauSu)
 
+PSicascSu <- PSicalc(safocascRISSu, exclude = FALSE, replicates = 999)
+
 #Cascapedia
 safocascRISSu = import.RInSp(summer, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Cascapedia"))
 
@@ -176,6 +185,8 @@ resultsCascWSu= WTcMC(safocascRISSu, weight="N_items", replicates=999)
 TroutECascSu = Eindex(safocascRISSu, index = "saramaki", jackknife = TRUE)
 
 sumMC.RInSp(resultsCascWSu)
+
+PSicascSu <- PSicalc(safocascRISSu, exclude = FALSE, replicates = 999)
 
 
 #Thibault
@@ -189,7 +200,10 @@ TroutESu = Eindex(safothibRISSu, index = "saramaki", jackknife = TRUE)
 
 sumMC.RInSp(resultsThibWSu)
 
-#Haymard 
+PSiThibSu <- PSicalc(safothibRISSu, exclude = FALSE, replicates = 999)
+
+#Haymard
+
 safoHayRISSu = import.RInSp(summer, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Haymard"))
 
 resultsHay <- WTcMC(safoHayRISSu, replicates = 999)
@@ -200,7 +214,21 @@ safohayESu = Eindex(safoHayRISSu, index = "saramaki", jackknife = TRUE)
 
 sumMC.RInSp(resultsHayWSu)
 
-#schoener 
+PSiHaySu <- PSicalc(safoHayRISSu, exclude = FALSE, replicates = 999)
+
+
+############
+#Shannon
+###########
+
+SummerSH <- subset(stomach_diversity, Season=="Summer")
+
+HaySum <- subset(summer, Lake=="Haymard")
+
+shannonHaySu <- (mean(diversity(HaySum, index = "shannon")))
+
+
+
 #Shannon diversity index 
 #Figures nice 
 
