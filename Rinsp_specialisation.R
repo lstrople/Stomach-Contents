@@ -57,6 +57,13 @@ sumMC.RInSp(results)
 #Chichocs
 ###########
 
+winter <- subset(safo, Season=="Winter")
+summer <- subset(safo, Season=="Summer")
+
+#################
+#season combined
+################
+
 #Haymard 
 safoHayRIS = import.RInSp(safo, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Haymard"))
 
@@ -103,7 +110,96 @@ TroutE = Eindex(safothibRIS, index = "saramaki", jackknife = TRUE)
 
 sumMC.RInSp(resultsThibW)
 
-#by season 
+########
+#winter
+########
+
+
+#Paul
+safopauRISWi = import.RInSp(winter, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Paul"))
+
+resultsPauWi <- WTcMC(safopauRISWi, replicates = 999)
+
+resultsPauWWi= WTcMC(safopauRISWi, weight="N_items", replicates=999)
+
+TroutEPauWi = Eindex(safopauRISWi, index = "saramaki", jackknife = TRUE)
+
+sumMC.RInSp(resultsPauWi)
+
+#Cascapedia
+safocascRISWi = import.RInSp(winter, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Cascapedia"))
+
+resultsCascWi <- WTcMC(safocascRISWi, replicates = 999)
+
+resultsCascWWi= WTcMC(safocascRISWi, weight="N_items", replicates=999)
+
+TroutECascWi = Eindex(safocascRISWi, index = "saramaki", jackknife = TRUE)
+
+sumMC.RInSp(resultsCascWWi)
+
+
+#Thibault
+safothibRISWi = import.RInSp(winter, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Thibault"))
+
+resultsThibWi <- WTcMC(safothibRISWi, replicates = 999)
+
+resultsThibWWi = WTcMC(safothibRISWi, weight="N_items", replicates=999)
+
+TroutEWi = Eindex(safothibRISWi, index = "saramaki", jackknife = TRUE)
+
+sumMC.RInSp(resultsThibWWi)
+
+
+########
+#summer
+########
+
+
+#Paul
+safopauRISSu = import.RInSp(summer, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Paul"))
+
+resultsPauSu <- WTcMC(safopauRISSu, replicates = 999)
+
+resultsPauWSu= WTcMC(safopauRISSu, weight="N_items", replicates=999)
+
+TroutEPauSu = Eindex(safopauRISSu, index = "saramaki", jackknife = TRUE)
+
+sumMC.RInSp(resultsPauSu)
+
+#Cascapedia
+safocascRISSu = import.RInSp(summer, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Cascapedia"))
+
+resultsCascSu <- WTcMC(safocascRISSu, replicates = 999)
+
+resultsCascWSu= WTcMC(safocascRISSu, weight="N_items", replicates=999)
+
+TroutECascSu = Eindex(safocascRISSu, index = "saramaki", jackknife = TRUE)
+
+sumMC.RInSp(resultsCascWSu)
+
+
+#Thibault
+safothibRISSu = import.RInSp(summer, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Thibault"))
+
+resultsThibWi <- WTcMC(safothibRISSu, replicates = 999)
+
+resultsThibWSu = WTcMC(safothibRISSu, weight="N_items", replicates=999)
+
+TroutESu = Eindex(safothibRISSu, index = "saramaki", jackknife = TRUE)
+
+sumMC.RInSp(resultsThibWSu)
+
+#Haymard 
+safoHayRISSu = import.RInSp(summer, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Haymard"))
+
+resultsHay <- WTcMC(safoHayRISSu, replicates = 999)
+
+resultsHayWSu= WTcMC(safoHayRISSu, weight="N_items", replicates=999)
+
+safohayESu = Eindex(safoHayRISSu, index = "saramaki", jackknife = TRUE)
+
+sumMC.RInSp(resultsHayWSu)
+
 #schoener 
 #Shannon diversity index 
 #Figures nice 
