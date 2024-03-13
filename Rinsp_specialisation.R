@@ -11,7 +11,7 @@ library(vegan)
 
 setwd("C:/Users/lstrople/OneDrive - Norwegian University of Life Sciences/Winter_paper/KML files")
 
-safo.df <- read.csv("C:/Users/lstrople/OneDrive - Norwegian University of Life Sciences/Mathias/stomach contents/stomachcontentsafo.csv")
+safo.df <- read.csv("C:/Users/lstrople/OneDrive - Norwegian University of Life Sciences/Mathias/stomach contents/SAFO.csv")
 
 winter <- subset(safo, Season=="Winter")
 summer <- subset(safo, Season=="Summer")
