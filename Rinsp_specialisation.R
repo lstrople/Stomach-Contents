@@ -3,6 +3,7 @@
 ##########
 library(RInSp)
 library(vegan)
+library(dplyr)
 
 
 ###########
@@ -11,60 +12,12 @@ library(vegan)
 
 setwd("C:/Users/lstrople/OneDrive - Norwegian University of Life Sciences/Winter_paper/KML files")
 
-safo.df <- read.csv("C:/Users/lstrople/OneDrive - Norwegian University of Life Sciences/Mathias/stomach contents/SAFO.csv")
+safo.df <- read.csv("C:/Users/lstrople/OneDrive - Norwegian University of Life Sciences/Mathias & Leah/Excel files/safo.csv")
 
-winter <- subset(safo, Season=="Winter")
-summer <- subset(safo, Season=="Summer")
+winter <- subset(safo.df, Season=="Winter")
+summer <- subset(safo.df, Season=="Summer")
 
-#################
-#season combined
-################
 
-#Haymard 
-safoHayRIS = import.RInSp(stomachcontentsafo, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Haymard"))
-
-resultsHay <- WTcMC(safoHayRIS, replicates = 999)
-
-resultsHayW= WTcMC(safoHayRIS, weight="N_items", replicates=999)
-
-safohayE = Eindex(safoHayRIS, index = "saramaki", jackknife = TRUE)
-
-#Schoner 0 niche overlap and 1 non niche over
-
-sumMC.RInSp(resultsHayW)
-
-#Paul
-safopauRIS = import.RInSp(safo, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Paul"))
-
-resultsPau <- WTcMC(safopauRIS, replicates = 999)
-
-resultsPauW= WTcMC(safopauRIS, weight="N_items", replicates=999)
-
-TroutE = Eindex(safopauRIS, index = "saramaki", jackknife = TRUE)
-
-sumMC.RInSp(resultsPauW)
-
-#Cascapedia
-safocascRIS = import.RInSp(safo, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Cascapedia"))
-
-resultsCasc <- WTcMC(safocascRIS, replicates = 999)
-
-resultsCascW= WTcMC(safocascRIS, weight="N_items", replicates=999)
-
-TroutE = Eindex(safocascRIS, index = "saramaki", jackknife = TRUE)
-
-sumMC.RInSp(resultsCascW)
-
-#Thibault
-safothibRIS = import.RInSp(safo, col.header=TRUE, row.names=1, info.cols=c(1:6), data.type = "integer", subset.rows = c("Lake", "Thibault"))
-
-resultsThib <- WTcMC(safothibRIS, replicates = 999)
-
-resultsThibW = WTcMC(safothibRIS, weight="N_items", replicates=999)
-
-TroutE = Eindex(safothibRIS, index = "saramaki", jackknife = TRUE)
-
-sumMC.RInSp(resultsThibW)
 
 ########
 #winter
@@ -173,21 +126,19 @@ sumMC.RInSp(resultsHayWSu)
 PSiHaySu <- PSicalc(safoHayRISSu, exclude = FALSE, replicates = 999)
 
 
-############
-#Shannon
+
+
+
 ###########
+#Simpson
+###########
+#0 represents no diversity (only one species present) and 1 represents infinite diversity
 
-SummerSH <- subset(stomach_diversity, Season=="Summer")
+summerHay <- subset(summer, Lake=="Haymard")
+summerSimpHay <- summerHay %>% select(c(-Date,-Date_Processed,-Season,-Lake, -Specie))
+simpsonHaySum <- (mean(diversity(summerSimpHay, index = "simpson")))
 
-HaySum <- subset(summer, Lake=="Haymard")
-
-shannonHaySu <- (mean(diversity(HaySum, index = "shannon")))
-
-
-
-#Shannon diversity index 
-#Figures nice 
-
-
-
+summerHay <- subset(summer, Lake=="Haymard")
+summerSimpHay <- summerHay %>% select(c(-Date,-Date_Processed,-Season,-Lake, -Specie))
+simpsonHaySum <- (mean(diversity(summerSimpHay, index = "simpson")))
 
