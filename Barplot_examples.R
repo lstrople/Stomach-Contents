@@ -1,6 +1,9 @@
 library(ggplot2)
 
-p0<- ggplot(safo, aes(x=Lake, y=Ephemeroptera,  fill=Season))
+Index.df <- read.csv("C:/Users/lstrople/OneDrive - Norwegian University of Life Sciences/Mathias & Leah/Excel files/Values_from_RInSP.csv")
+
+#E index
+p0<- ggplot(Index.df, aes(x=Lake, y=E_value,  fill=Season))
 p0 <- p0 + geom_bar(stat="identity", position=position_dodge())
 p0 <- p0 + theme_bw(base_size = 9)
 p0 <- p0 + scale_fill_manual(values=c("#cfe0c3", "#005478"))
